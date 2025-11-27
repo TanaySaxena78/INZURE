@@ -32,7 +32,7 @@
 This project is built with **Vanilla HTML5, JavaScript, and Tailwind CSS**. It requires **no build step** and can be run on any standard web server.
 
 ### Option 1: Direct Open (Easiest)
-Simply double-click `dashboard.html` to open the application in your default web browser.
+Clone the repo and then simply double-click `dashboard.html` to open the application in your default web browser.
 Then click **New Case** to file a new FNOL.
 
 ### Option 2: Local Server (Recommended)
