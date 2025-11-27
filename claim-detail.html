@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claim Detail - Antigravity Claims</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+
+<body class="bg-gray-50 dark:bg-gray-900">
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+        <div class="px-3 py-3 lg:px-5">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center justify-start">
+                    <a href="dashboard.html" class="flex items-center text-gray-500 hover:text-gray-900 mr-4">
+                        <i data-lucide="arrow-left" class="w-6 h-6"></i>
+                    </a>
+                    <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Claim
+                        <span id="headerClaimId">#...</span></span>
+                    <span id="headerStatus"
+                        class="ml-4 bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">Pending</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button id="exportBtn"
+                        class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
+                        Export PDF
+                    </button>
+                    <button id="approveBtn"
+                        class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                        Approve & Settle
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="pt-20 pb-8 px-4 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+        <!-- Left Column: Images & Timeline -->
+        <div class="lg:col-span-2 space-y-6">
+            <!-- Images Card -->
+            <div class="bg-white rounded-lg shadow dark:bg-gray-800 p-4">
+                <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">Evidence Photos</h3>
+                <div id="imageGallery" class="grid grid-cols-2 gap-4">
+                    <!-- Images injected here -->
+                </div>
+            </div>
+
+            <!-- Timeline Card -->
+            <div class="bg-white rounded-lg shadow dark:bg-gray-800 p-4">
+                <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">Claim History</h3>
+                <ol id="timeline" class="relative border-l border-gray-200 dark:border-gray-700 ml-3">
+                    <!-- Timeline items injected here -->
+                </ol>
+            </div>
+        </div>
+
+        <!-- Right Column: AI Analysis & Details -->
+        <div class="space-y-6">
+            <!-- AI Analysis Card -->
+            <div class="bg-white rounded-lg shadow dark:bg-gray-800 p-6 border-t-4 border-blue-600">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
+                        <i data-lucide="bot" class="w-6 h-6 text-blue-600"></i>
+                        AI Analysis
+                    </h3>
+                    <span
+                        class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">v1.2</span>
+                </div>
+
+                <!-- Severity -->
+                <div class="mb-4">
+                    <div class="flex justify-between mb-1">
+                        <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Severity Score</span>
+                        <span id="detailSeverityLabel"
+                            class="text-sm font-medium text-blue-700 dark:text-white">Medium</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                        <div id="detailSeverityBar" class="bg-blue-600 h-2.5 rounded-full" style="width: 45%"></div>
+                    </div>
+                </div>
+
+                <!-- Fraud -->
+                <div class="mb-6">
+                    <div class="flex justify-between mb-1">
+                        <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Fraud Probability</span>
+                        <span id="detailFraudLabel" class="text-sm font-medium text-red-700 dark:text-white">12%</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                        <div id="detailFraudBar" class="bg-red-600 h-2.5 rounded-full" style="width: 12%"></div>
+                    </div>
+                </div>
+
+                <!-- Payout -->
+                <div class="p-4 bg-gray-50 rounded-lg dark:bg-gray-700 mb-4">
+                    <div class="flex justify-between items-center">
+                        <div class="mt-6 pt-4 border-t border-gray-200 dark:border-gray-700 flex flex-col gap-2">
+                            <button onclick="escalateClaim()"
+                                class="w-full text-yellow-700 bg-yellow-100 hover:bg-yellow-200 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                                Escalate to SIU
+                            </button>
+                            <button
+                                class="w-full text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5">
+                                Request More Info
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Claimant Info -->
+                    <div class="bg-white rounded-lg shadow dark:bg-gray-800 p-6">
+                        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">Claimant Details</h3>
+                        <dl class="space-y-2 text-sm">
+                            <div class="flex justify-between">
+                                <dt class="text-gray-500">Name</dt>
+                                <dd id="detailName" class="font-medium text-gray-900">John Doe</dd>
+                            </div>
+                            <div class="flex justify-between">
+                                <dt class="text-gray-500">Policy</dt>
+                                <dd id="detailPolicy" class="font-medium text-gray-900">POL-123</dd>
+                            </div>
+                            <div class="flex justify-between">
+                                <dt class="text-gray-500">Contact</dt>
+                                <dd id="detailContact" class="font-medium text-gray-900">john@example.com</dd>
+                            </div>
+                        </dl>
+                        <div class="mt-4">
+                            <h4 class="text-xs font-semibold text-gray-500 uppercase mb-1">Description</h4>
+                            <p id="detailDescription" class="text-sm text-gray-700 bg-gray-50 p-3 rounded">
+                                "Rear ended..."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script src="js/storage.js"></script>
+            <script>
+                let currentClaim = null;
+
+                function loadClaim(id) {
+                    currentClaim = Storage.getClaim(id);
+                    if (!currentClaim) return;
+
+                    // Header
+                    document.getElementById('headerClaimId').textContent = `#${currentClaim.claimId}`;
+                    document.getElementById('headerStatus').textContent = currentClaim.status;
+
+                    // Claimant
+                    document.getElementById('detailName').textContent = currentClaim.claimant.name;
+                    document.getElementById('detailPolicy').textContent = currentClaim.claimant.policyNumber;
+                    document.getElementById('detailContact').textContent = currentClaim.claimant.contact;
+                    document.getElementById('detailDescription').textContent = currentClaim.description;
+
+                    // AI Analysis
+                    const ai = currentClaim.aiAnalysis;
+                    document.getElementById('detailSeverityLabel').textContent = ai.severityLabel;
+                    document.getElementById('detailSeverityBar').style.width = `${ai.severityScore * 100}%`;
+
+                    document.getElementById('detailFraudLabel').textContent = `${(ai.fraudProbability * 100).toFixed(0)}%`;
+                    document.getElementById('detailFraudBar').style.width = `${ai.fraudProbability * 100}%`;
+
+                    document.getElementById('detailPayout').textContent = `$${ai.estimatedPayout.toLocaleString()}`;
+
+                    const evidenceList = document.getElementById('detailEvidence');
+                    evidenceList.innerHTML = '';
+                    ai.evidence.forEach(item => {
+                        const li = document.createElement('li');
+                        li.className = 'flex items-start gap-2';
+                        li.innerHTML = `<i data-lucide="check-circle-2" class="w-4 h-4 text-green-500 mt-0.5"></i> <span>${item}</span>`;
+                        evidenceList.appendChild(li);
+                    });
+                    lucide.createIcons();
+
+                    // Images
+                    const gallery = document.getElementById('imageGallery');
+                    gallery.innerHTML = '';
+                    currentClaim.images.forEach(img => {
+                        const div = document.createElement('div');
+                        div.innerHTML = `
+                    <img src="${img.url}" class="h-48 w-full object-cover rounded-lg border border-gray-200 cursor-pointer hover:opacity-90">
+                    <p class="text-xs text-gray-500 mt-1">Relevance: ${(ai.imageQuality.relevanceScore * 100).toFixed(0)}%</p>
+                `;
+                        gallery.appendChild(div);
+                    });
+
+                    // Timeline
+                    const timeline = document.getElementById('timeline');
+                    timeline.innerHTML = '';
+                    currentClaim.history.forEach(item => {
+                        const li = document.createElement('li');
+                        li.className = 'mb-10 ml-4';
+                        li.innerHTML = `
+                    <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
+                    <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">${new Date(item.timestamp).toLocaleString()}</time>
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white capitalize">${item.action}</h3>
+                    <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">${item.details}</p>
+                `;
+                        timeline.appendChild(li);
+                    });
+                }
+
+                function approveClaim() {
+                    if (!confirm("Are you sure you want to approve this claim for settlement?")) return;
+
+                    currentClaim.status = "Approved";
+                    currentClaim.history.unshift({
+                        timestamp: new Date().toISOString(),
+                        user: "adjuster",
+                        action: "approved",
+                        details: `Claim approved for payout of $${currentClaim.aiAnalysis.estimatedPayout}`
+                    });
+                    Storage.saveClaim(currentClaim);
+                    location.reload();
+                }
+
+                function escalateClaim() {
+                    if (!confirm("Escalate this claim to SIU for fraud investigation?")) return;
+
+                    currentClaim.status = "Escalated";
+                    currentClaim.history.unshift({
+                        timestamp: new Date().toISOString(),
+                        user: "adjuster",
+                        action: "escalated",
+                        details: "Flagged for manual fraud review"
+                    });
+                    Storage.saveClaim(currentClaim);
+                    location.reload();
+                }
+
+                function exportPDF() {
+                    const { jsPDF } = window.jspdf;
+                    const doc = new jsPDF();
+
+                    doc.setFontSize(20);
+                    doc.text(`Claim Summary: ${currentClaim.claimId}`, 10, 20);
+
+                    doc.setFontSize(12);
+                    doc.text(`Claimant: ${currentClaim.claimant.name}`, 10, 40);
+                    doc.text(`Status: ${currentClaim.status}`, 10, 50);
+                    doc.text(`Estimated Payout: $${currentClaim.aiAnalysis.estimatedPayout}`, 10, 60);
+
+                    doc.text("AI Analysis:", 10, 80);
+                    doc.setFontSize(10);
+                    const splitText = doc.splitTextToSize(currentClaim.aiAnalysis.explainability, 180);
+                    doc.text(splitText, 10, 90);
+
+                    doc.save(`${currentClaim.claimId}_summary.pdf`);
+                }
+            </script>
+</body>
+
+</html>

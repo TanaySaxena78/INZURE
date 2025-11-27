@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inzure - Adjuster Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body class="bg-gray-50 dark:bg-gray-900">
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+        <div class="px-3 py-3 lg:px-5">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center justify-start">
+                    <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar"
+                        aria-controls="logo-sidebar" type="button"
+                        class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+                        <span class="sr-only">Open sidebar</span>
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                    <a href="#" class="flex ml-2 md:mr-24">
+                        <span
+                            class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white text-blue-600">Inzure</span>
+                    </a>
+                </div>
+                <div class="flex items-center">
+                    <div class="flex items-center ms-3">
+                        <div>
+                            <button type="button"
+                                class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                                aria-expanded="false" data-dropdown-toggle="dropdown-user">
+                                <span class="sr-only">Open user menu</span>
+                                <img class="w-8 h-8 rounded-full"
+                                    src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+                                    alt="user photo">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <aside id="logo-sidebar"
+        class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
+        aria-label="Sidebar">
+        <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
+            <ul class="space-y-2 font-medium">
+                <li>
+                    <a href="#"
+                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group bg-gray-100">
+                        <i data-lucide="layout-dashboard"
+                            class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"></i>
+                        <span class="ml-3">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#"
+                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                        <i data-lucide="inbox"
+                            class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"></i>
+                        <span class="flex-1 ml-3 whitespace-nowrap">Inbox</span>
+                        <span
+                            class="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">3</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#"
+                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                        <i data-lucide="users"
+                            class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"></i>
+                        <span class="flex-1 ml-3 whitespace-nowrap">Team</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="index.html"
+                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                        <i data-lucide="plus-circle"
+                            class="w-5 h-5 text-blue-600 transition duration-75 group-hover:text-blue-700"></i>
+                        <span
+                            class="flex-1 ml-3 whitespace-nowrap font-semibold text-blue-600 group-hover:text-blue-700">New
+                            Case</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="p-4 sm:ml-64 pt-20">
+
+        <!-- KPI Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+            <div
+                class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800 hover-card">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Total Claims</h3>
+                    <span
+                        class="bg-green-100 text-green-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">
+                        <i data-lucide="arrow-up" class="w-3 h-3 mr-1"></i> 12%
+                    </span>
+                </div>
+                <div id="kpiTotalClaims" class="text-2xl font-bold text-gray-900 dark:text-white">0</div>
+            </div>
+            <div
+                class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800 hover-card">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Avg Triage Time</h3>
+                </div>
+                <div class="text-2xl font-bold text-gray-900 dark:text-white">1.2m</div>
+                <div class="text-sm text-gray-500">AI Assisted</div>
+            </div>
+            <div
+                class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800 hover-card">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Fraud Flagged</h3>
+                    <span
+                        class="bg-red-100 text-red-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">
+                        High Risk
+                    </span>
+                </div>
+                <div id="kpiFraud" class="text-2xl font-bold text-gray-900 dark:text-white">0</div>
+            </div>
+            <div
+                class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800 hover-card">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Pending Review</h3>
+                </div>
+                <div id="kpiPending" class="text-2xl font-bold text-gray-900 dark:text-white">0</div>
+            </div>
+        </div>
+
+        <!-- Claims Table -->
+        <div
+            class="bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 dark:bg-gray-800 overflow-hidden">
+            <div class="p-4 flex items-center justify-between border-b border-gray-200 dark:border-gray-700">
+                <h2 class="text-lg font-semibold text-gray-900 dark:text-white">Recent Claims</h2>
+                <div class="flex gap-2">
+                    <button id="refreshBtn" class="p-2 text-gray-500 rounded hover:bg-gray-100">
+                        <i data-lucide="refresh-cw" class="w-5 h-5"></i>
+                    </button>
+                    <button
+                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Export
+                        CSV</button>
+                </div>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="px-4 py-3">Claim ID</th>
+                            <th scope="col" class="px-4 py-3">Claimant</th>
+                            <th scope="col" class="px-4 py-3">Date</th>
+                            <th scope="col" class="px-4 py-3">Severity</th>
+                            <th scope="col" class="px-4 py-3">Fraud Risk</th>
+                            <th scope="col" class="px-4 py-3">Status</th>
+                            <th scope="col" class="px-4 py-3">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="claimsTableBody">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+            <!-- Pagination -->
+            <nav class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4"
+                aria-label="Table navigation">
+                <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
+                    Showing <span class="font-semibold text-gray-900 dark:text-white">1-10</span> of <span
+                        class="font-semibold text-gray-900 dark:text-white">100</span>
+                </span>
+                <ul class="inline-flex items-stretch -space-x-px">
+                    <li>
+                        <a href="#"
+                            class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                            <span class="sr-only">Previous</span>
+                            <i data-lucide="chevron-left" class="w-4 h-4"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"
+                            class="flex items-center justify-center h-full py-1.5 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                            <span class="sr-only">Next</span>
+                            <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <script src="js/storage.js"></script>
+    <script>
+        // Dashboard specific logic inline for simplicity
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            loadDashboard();
+
+            document.getElementById('refreshBtn').addEventListener('click', loadDashboard);
+        });
+
+        function loadDashboard() {
+            const claims = Storage.getClaims();
+            const tbody = document.getElementById('claimsTableBody');
+            tbody.innerHTML = '';
+
+            // Update KPIs
+            document.getElementById('kpiTotalClaims').textContent = claims.length;
+            document.getElementById('kpiFraud').textContent = claims.filter(c => c.aiAnalysis.fraudProbability > 0.5).length;
+            document.getElementById('kpiPending').textContent = claims.filter(c => c.status === 'Pending Review').length;
+
+            claims.forEach(claim => {
+                const tr = document.createElement('tr');
+                tr.className = 'bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 cursor-pointer';
+                tr.onclick = (e) => {
+                    if (!e.target.closest('button')) window.location.href = `claim-detail.html?id=${claim.claimId}`;
+                };
+
+                const severityColor = getSeverityColor(claim.aiAnalysis.severityLabel);
+                const fraudColor = getFraudColor(claim.aiAnalysis.fraudProbability);
+                const statusColor = getStatusColor(claim.status);
+
+                tr.innerHTML = `
+                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">${claim.claimId}</td>
+                    <td class="px-4 py-3">${claim.claimant.name}</td>
+                    <td class="px-4 py-3">${new Date(claim.createdAt).toLocaleDateString()}</td>
+                    <td class="px-4 py-3">
+                        <span class="${severityColor} text-xs font-medium px-2 py-0.5 rounded">${claim.aiAnalysis.severityLabel}</span>
+                    </td>
+                    <td class="px-4 py-3">
+                        <span class="${fraudColor} text-xs font-medium px-2 py-0.5 rounded">${(claim.aiAnalysis.fraudProbability * 100).toFixed(0)}%</span>
+                    </td>
+                    <td class="px-4 py-3">
+                        <span class="${statusColor} text-xs font-medium px-2 py-0.5 rounded">${claim.status}</span>
+                    </td>
+                    <td class="px-4 py-3 flex items-center gap-2">
+                        <button onclick="window.location.href='claim-detail.html?id=${claim.claimId}'" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function getSeverityColor(label) {
+            switch (label) {
+                case 'Minor': return 'bg-green-100 text-green-800';
+                case 'Low': return 'bg-blue-100 text-blue-800';
+                case 'Medium': return 'bg-yellow-100 text-yellow-800';
+                case 'High': return 'bg-red-100 text-red-800';
+                default: return 'bg-gray-100 text-gray-800';
+            }
+        }
+
+        function getFraudColor(prob) {
+            if (prob < 0.3) return 'bg-green-100 text-green-800';
+            if (prob < 0.6) return 'bg-yellow-100 text-yellow-800';
+            return 'bg-red-100 text-red-800';
+        }
+
+        function getStatusColor(status) {
+            switch (status) {
+                case 'Approved': return 'bg-green-100 text-green-800';
+                case 'Escalated': return 'bg-red-100 text-red-800';
+                case 'Pending Review': return 'bg-blue-100 text-blue-800';
+                default: return 'bg-gray-100 text-gray-800';
+            }
+        }
+    </script>
+</body>
+
+</html>
