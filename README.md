@@ -2,8 +2,6 @@
 
 **Inzure** is a next-generation "Agentic Claims Processing" prototype designed to streamline the insurance workflow. It demonstrates a seamless, end-to-end journey from the First Notice of Loss (FNOL) submitted by a policyholder to intelligent AI analysis and final adjuster settlement.
 
-![Inzure Banner](https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?auto=format&fit=crop&w=1200&q=80)
-
 ## 🌟 Key Features
 
 ### 1. 🚗 Intelligent FNOL (First Notice of Loss)
@@ -79,7 +77,7 @@ For the best experience (to avoid CORS issues with some browser security setting
 
 ## 👥 Team
 
-*   **Tanay** - Lead Developer
+*   **Tanay Saxena - Lead Developer
 
 ---
 *Built for the Future of Insurance.*
